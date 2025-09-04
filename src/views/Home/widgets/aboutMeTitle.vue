@@ -29,4 +29,10 @@
     font-family: 'Lato', sans-serif;
     font-weight: 400;
 }
+
+@media (max-width: 768px) {
+  .subtitle{
+    text-align: center;
+  }
+}
 </style>

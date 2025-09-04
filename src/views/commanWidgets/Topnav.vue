@@ -1,17 +1,25 @@
 <script setup lang="ts">
 import { RouterLink } from 'vue-router';
+import MobileTopNav from './mobileTopNav.vue';
+
+const props = defineProps<{
+  users: any[]
+}>();
 
 </script>
 
 <template>
-  <div class="topBar">
+  <!-- Wrap in a div with the CSS class -->
+  <div class="mobileTop">
+    <MobileTopNav :users="props.users" />
+  </div>
 
+  <div class="topBar">
     <div class="logo">
-      Ranjan
+      {{ props.users.length > 0 ? props.users[0].name.split(" ")[0] : "Loading..." }}
     </div>
 
     <nav class="navBox">
-
       <div class="navitem">
         <router-link to="/">Home</router-link>
       </div>
@@ -27,17 +35,14 @@ import { RouterLink } from 'vue-router';
       <div class="navitem">
         <router-link :to="{ path: '/', hash: '#Contact' }">Contact me</router-link>
       </div>
-
     </nav>
 
     <div class="hireButton">
       Hire Me
     </div>
-
-
-
   </div>
 </template>
+
 
 <style scoped>
 .logo {
@@ -84,6 +89,21 @@ import { RouterLink } from 'vue-router';
   border-radius: 5px;
   color: #FFFFFF;
   font-size: 16px;
+}
+
+.mobileTop {
+  display: none;
+}
+@media (max-width: 768px) {
+  .topBar {
+    display: none;
+  }
+
+  .mobileTop {
+    display: block;
+  
+  }
 
 }
+
 </style>

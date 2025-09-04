@@ -1,23 +1,22 @@
 <script setup lang="ts">
 import '@fortawesome/fontawesome-free/css/all.css'
+const props = defineProps<{
+  email: string
+  phone: string
+}>()
 </script>
 
 <template>
   <div>
     <div class="middleBlock">
-
       <div class="row1">
         <i class="far fa-envelope"></i>
-        <div>
-          ranjanpanpura@gmail.com
-        </div>
+        <div>{{ props.email }}</div>
       </div>
 
       <div class="row2">
         <i class="fas fa-phone"></i>
-        <div>
-          +91 7632975366
-        </div>
+        <div>{{ props.phone }}</div>
       </div>
     </div>
 
@@ -60,5 +59,17 @@ import '@fortawesome/fontawesome-free/css/all.css'
   margin-top: 10px;
   text-align: center;
   margin-bottom: 20px;
+}
+
+@media (max-width: 768px) {
+  .horizontalLine {
+    width: 100%;
+  }
+
+  .row1,
+  .row2 {
+    font-size: 15px;
+  }
+  
 }
 </style>

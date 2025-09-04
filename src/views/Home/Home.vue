@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { onMounted } from "vue";
+import { ref,onMounted } from "vue";
+
 
 import AboutBlock from '../About/aboutBlock.vue';
 import SkillsMeter from '../About/skillsMeter.vue';
@@ -14,11 +15,13 @@ import HeroImage from './widgets/heroImage.vue';
 import Services from './widgets/services.vue';
 import ServicesBlock from './widgets/servicesBlock.vue';
 
+const users = ref<any[]>([]); 
+const services = ref<any[]>([]); 
+const skills = ref<any[]>([]); 
+const portfolioItems = ref<any[]>([]); 
 
 async function getUserDetails() {
-  const url = "/api/getDetails";
-
-
+  const url = "https://ranjankumar.xyz/getDetails";
   try {
     const response = await fetch(url, {
       method: "GET",
@@ -32,7 +35,11 @@ async function getUserDetails() {
     }
 
     const data = await response.json(); // parse JSON response
-    console.log("User details:", data);
+    users.value = data["users"]; 
+    services.value=data["services"]
+    skills.value=data["skills"]
+    portfolioItems.value=data["portfolio"]
+    console.log(data)
     return data;
 
   } catch (error) {
@@ -48,21 +55,21 @@ onMounted(() => {
 
 <template>
   <div>
-    <Topnav />
+    <Topnav :users="users" />
 
     <div class="heroPar">
-      <HeroDetails />
-      <HeroImage />
+      <HeroDetails :users="users" />
+      <HeroImage :users="users"/>
     </div>
-    <Services id="Services" />
-    <ServicesBlock />
+    <Services id="Services"/>
+    <ServicesBlock :services="services"  />
     <AboutMeTitle id="About" />
-    <AboutBlock />
-    <SkillsMeter />
-    <Portfolio id="Portfolio" />
+    <AboutBlock :users="users"/>
+    <SkillsMeter :skills="skills" />
+    <Portfolio id="Portfolio" :portfolio-items="portfolioItems" />
     <ContactTitle id="Contact" />
     <ContactInputs />
-    <Mfooter />
+    <Mfooter :users="users" />
   </div>
 </template>
 
@@ -75,4 +82,13 @@ onMounted(() => {
   align-items: center;
   gap: 60px;
 }
+@media (max-width: 768px) {
+ .heroPar{
+  flex-direction: column;
+  margin-top: 20px;
+ }
+
+}
+
+
 </style>

@@ -1,27 +1,37 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, computed } from "vue";
 
-// Example list of images (replace with your own)
-const images = [
-  "/public/me.png",
-  "/public/me.png",
-  "/public/me.png"
-];
+const props = defineProps<{
+  users: any[]
+}>();
+
+// Parse photos safely
+const images = computed(() => {
+  if (props.users.length > 0 && props.users[0].photos) {
+    try {
+      return JSON.parse(props.users[0].photos); // convert string → array
+    } catch (e) {
+      console.error("Invalid photos JSON:", e);
+      return [];
+    }
+  }
+  return [];
+});
 
 const currentIndex = ref(0);
 
 const prevImage = () => {
   currentIndex.value =
-    (currentIndex.value - 1 + images.length) % images.length;
+    (currentIndex.value - 1 + images.value.length) % images.value.length;
 };
 
 const nextImage = () => {
-  currentIndex.value = (currentIndex.value + 1) % images.length;
+  currentIndex.value = (currentIndex.value + 1) % images.value.length;
 };
 </script>
 
 <template>
-  <div class="heroImageWrapper">
+  <div class="heroImageWrapper" v-if="images.length">
     <!-- Left arrow -->
     <button class="arrow left" @click="prevImage">❮</button>
 
@@ -30,14 +40,18 @@ const nextImage = () => {
       :src="images[currentIndex]"
       alt="Hero"
       class="heroImage"
-      height="230"
-      width="60"
     />
 
     <!-- Right arrow -->
     <button class="arrow right" @click="nextImage">❯</button>
   </div>
+
+  <div v-else>
+    <p>No images available</p>
+  </div>
 </template>
+
+
 
 <style scoped>
 .heroImageWrapper {
@@ -61,10 +75,12 @@ const nextImage = () => {
 
 .heroImage {
   width: 220px;
-  height: 320px;
+  height: 250px;
   margin-bottom: 70px;
   margin-left: 10px;
   object-fit: contain;
+  margin-top: 80px;
+
 }
 
 /* Arrow buttons */
@@ -92,4 +108,3 @@ const nextImage = () => {
   right: -40px;
 }
 </style>
-

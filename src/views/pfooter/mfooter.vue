@@ -2,12 +2,18 @@
 import GmailPhone from './gmailPhone.vue';
 
 
+const props = defineProps<{
+  users: any[]
+}>();
+
+
+
 </script>
 
 <template>
   <div class="fitems">
     <div class="logo">
-      Ranjan
+      {{ props.users.length > 0 ? props.users[0].name.split(" ")[0] : "Loading..." }}
     </div>
 
     <nav class="navBox">
@@ -31,20 +37,23 @@ import GmailPhone from './gmailPhone.vue';
     </nav>
 
 
-    <div class="socialLinks">
-
-      <a href="https://instagram.com/yourprofile" target="_blank">
+    <div class="socialLinks" v-if="props.users.length > 0">
+      <a :href="props.users[0].instagramProfile" target="_blank">
         <i class="fab fa-instagram"></i>
       </a>
-      <a href="https://linkedin.com/in/yourprofile" target="_blank">
+      <a :href="props.users[0].linkedInProfile" target="_blank">
         <i class="fab fa-linkedin"></i>
       </a>
-      <a href="https://twitter.com/yourprofile" target="_blank">
-        <i class="fab fa-twitter"></i>
+      <a :href="props.users[0].githubProfile" target="_blank">
+        <i class="fab fa-github"></i>
+      </a>
+      <a :href="props.users[0].playConsoleProfile" target="_blank">
+        <i class="fab fa-google-play"></i>
       </a>
     </div>
 
-    <GmailPhone />
+
+    <GmailPhone v-if="props.users.length > 0" :email="props.users[0].email" :phone="props.users[0].phone" />
 
 
   </div>

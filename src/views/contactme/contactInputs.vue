@@ -1,6 +1,9 @@
 <script setup lang="ts">
-</script>
 
+function onSend(){
+    alert("This was dummy function");
+}
+</script>
 <template>
     <div class="middleBlock">
 
@@ -20,7 +23,7 @@
         </div>
 
         <div class="inputRow">
-            <div class="sendButton">
+            <div class="sendButton" @click="onSend">
                 <div class="msend">Send</div>
             </div>
         </div>
@@ -58,6 +61,11 @@
     justify-items: flex-end;
 }
 
+.msend:hover {
+    background-color: #FD6F00;
+
+}
+
 .msend {
     padding-top: 3px;
     padding-bottom: 3px;
@@ -75,5 +83,19 @@
     border-radius: 5px;
     outline: none;
     padding-top: 7px;
+}
+
+@media (max-width: 768px) {
+    .inputRow {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .sendButton {
+        width: 550px;
+        justify-content: center;
+        justify-items: center;
+        margin-bottom: 20px;
+    }
 }
 </style>

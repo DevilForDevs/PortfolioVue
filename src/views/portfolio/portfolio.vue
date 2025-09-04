@@ -2,17 +2,18 @@
 import { ref, computed } from "vue";
 import "@fortawesome/fontawesome-free/css/all.css";
 
-// Portfolio data
-const portfolioItems = ref([
-  { id: 1, title: "Landing Page", type: "Frontend" },
-  { id: 2, title: "React Native App", type: "Mobile Apps" },
-  { id: 3, title: "Vue Dashboard", type: "Frontend" },
-  { id: 4, title: "Electron Notes App", type: "Desktop Apps" },
-  { id: 5, title: "iOS Chat App", type: "Mobile Apps" }
-]);
+const props = defineProps<{
+  portfolioItems: {
+    id: number;
+    title: string;
+    category: string;
+    image_url: string;
+    githubLink: string;
+  }[];
+}>();
 
-// Menus
-const menus = ["All", "Frontend", "Mobile Apps", "Desktop Apps"];
+// Menus dynamically from categories + "All"
+const menus = computed(() => ["All", ...new Set(props.portfolioItems.map(item => item.category))]);
 
 // Active menu
 const activeMenu = ref("All");
@@ -20,10 +21,10 @@ const activeMenu = ref("All");
 // Filtered items
 const filteredItems = computed(() => {
   if (activeMenu.value === "All") {
-    return portfolioItems.value;
+    return props.portfolioItems;
   }
-  return portfolioItems.value.filter(
-    (item) => item.type === activeMenu.value
+  return props.portfolioItems.filter(
+    (item) => item.category === activeMenu.value
   );
 });
 
@@ -33,19 +34,15 @@ const setMenu = (menu: string) => {
 };
 </script>
 
+
 <template>
   <div class="pbody">
     <div class="mtitle">Portfolio</div>
 
     <!-- Menu -->
     <div class="menusbar">
-      <div
-        v-for="menu in menus"
-        :key="menu"
-        class="menuItem"
-        :class="{ active: activeMenu === menu }"
-        @click="setMenu(menu)"
-      >
+      <div v-for="menu in menus" :key="menu" class="menuItem" :class="{ active: activeMenu === menu }"
+        @click="setMenu(menu)">
         {{ menu }}
       </div>
     </div>
@@ -54,15 +51,21 @@ const setMenu = (menu: string) => {
     <div class="items">
       <div v-for="item in filteredItems" :key="item.id" class="portfolioItem">
 
-        <img src="/public/cs.svg"/>
+
+
+        <img :src="item.image_url" class="portfolioImage" />
         <div class="projectInfo">
           <div>{{ item.title }}</div>
-          <div>{{ item.type }}</div>
+          <div>{{ item.category }}</div>
+          <a :href="item.githubLink" target="_blank">
+            <i class="fab fa-github"></i>
+          </a>
         </div>
       </div>
     </div>
   </div>
 </template>
+
 
 <style scoped>
 .mtitle {
@@ -106,24 +109,34 @@ const setMenu = (menu: string) => {
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 15px;
   padding: 10px;
+
+  /* 👇 New */
+  justify-content: center;
 }
 
 .portfolioItem {
   border-radius: 10px;
   padding: 20px;
   text-align: center;
-  
-}
 
-.projectInfo{
-    display: flex;
-    background: #ffffff0a;
-    justify-content:space-between;
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
 
 }
+
+.projectInfo {
+  display: flex;
+  background: #ffffff0a;
+  justify-content: space-between;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.portfolioImage {
+  width: 100%;
+  height: 220px;
+  object-fit: contain;
+  border-radius: 8px 8px 0 0;
+  background: #111;
+}
+
+
 </style>
-
-
-
