@@ -1,5 +1,18 @@
-# Vue 3 + TypeScript + Vite
+<h1 align="center">Portfolio Webpage</h1>
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+<p align="center">
+  <img src="https://img.shields.io/badge/Vue-red?style=for-the-badge" alt="Bold Badge">
+</p>
 
-Learn more about the recommended Project Setup and IDE Support in the [Vue Docs TypeScript Guide](https://vuejs.org/guide/typescript/overview.html#project-setup).
+<p align="center">
+  🌐 <a href="https://ranjankumar.xyz/" target="_blank">Visit Website</a>
+</p>
+
+<img width="1024" height="768" alt="Screenshot (396)" src="https://github.com/user-attachments/assets/62bb6bdb-adf0-48c2-8c2e-1356541a092b" />
+<img  alt="mobileScreenshot" src="https://github.com/user-attachments/assets/b36a1cab-94be-490e-825f-4443af86579d" />
+
+<h1>Components it have</h1>
+
+- Main app with router and proxy to server for realtime server testing.  
+- Modular components and pages.
+- With Mobile media quires. 
