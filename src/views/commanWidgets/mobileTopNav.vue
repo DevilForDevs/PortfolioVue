@@ -36,7 +36,7 @@ const toggleMenu = () => {
       <router-link to="/">Home</router-link>
     </div>
     <div class="navitem">
-      <router-link :to="{ path: '/', hash: '#Services' }">Services</router-link>
+      <router-link :to="{ path: '/', hash: '#Projects' }">Projects</router-link>
     </div>
     <div class="navitem">
       <router-link :to="{ path: '/', hash: '#About' }">About</router-link>
@@ -85,7 +85,7 @@ const toggleMenu = () => {
   font-size: 16px;
   height: 30px;
   padding: 5px 8px 0px 8px;
-  
+
   border-radius: 5px;
 }
 

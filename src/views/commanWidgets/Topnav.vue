@@ -24,7 +24,7 @@ const props = defineProps<{
         <router-link to="/">Home</router-link>
       </div>
       <div class="navitem">
-        <router-link :to="{ path: '/', hash: '#Services' }">Services</router-link>
+        <router-link :to="{ path: '/', hash: '#Projects' }">Projects</router-link>
       </div>
       <div class="navitem">
         <router-link :to="{ path: '/', hash: '#About' }">About</router-link>
@@ -94,6 +94,7 @@ const props = defineProps<{
 .mobileTop {
   display: none;
 }
+
 @media (max-width: 768px) {
   .topBar {
     display: none;
@@ -101,9 +102,8 @@ const props = defineProps<{
 
   .mobileTop {
     display: block;
-  
+
   }
 
 }
-
 </style>
