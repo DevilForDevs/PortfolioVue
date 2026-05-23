@@ -5,7 +5,7 @@
 </p>
 
 <p align="center">
-  🌐 <a href="https://ranjankumar.xyz/" target="_blank">Visit Website</a>
+  🌐 <a href="https://ranjan20s.fun/" target="_blank">Visit Website</a>
 </p>
 
 ## 🎨 Design
